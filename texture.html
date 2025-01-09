@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テクスチャデバッグ</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #333;
+        }
+        canvas {
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    // テクスチャを生成する関数
+    function generate() {
+        const canvas = document.createElement('canvas');
+        canvas.width = canvas.height = 256;
+
+        const context = canvas.getContext('2d');
+        const gradient = context.createRadialGradient(
+            canvas.width / 2, canvas.height / 2, 0,
+            canvas.width / 2, canvas.height / 2, canvas.width / 2
+        );
+
+        gradient.addColorStop(0, 'rgba(255,255,255,1)');
+        gradient.addColorStop(0.1, 'rgba(170,248,255,0.3)');
+        gradient.addColorStop(0.2, 'rgba(0,37,97,1)');
+        gradient.addColorStop(1, 'rgba(0,0,0,1)');
+
+        context.fillStyle = gradient;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        return canvas; // キャンバスを返す
+    }
+
+    // 生成されたキャンバスを表示
+    const debugCanvas = generate();
+    document.body.appendChild(debugCanvas); // bodyに追加して表示
+</script>
+
+</body>
+</html>
+
